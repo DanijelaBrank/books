@@ -1,0 +1,29 @@
+.books {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-content: flex-start;
+    flex-wrap: wrap;}
+  
+    .card {
+      position: relative;
+      width: 20%;
+      padding: 10px;}
+
+.star-button{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+      /* sx={{width: '100%',
+        border: '2px solid black',
+        paddingBottom: '10px',
+        display:'flex',      
+        flexDirection:'row',
+        flexWrap:'wrap'}} */
+
+        /*  sx={{ minWidth: 300, border: '1px solid black',
+    boxShadow: '7px 7px #888888', margin:'5px', width: '100px', height: '200px'}}>       */
+  
+      
