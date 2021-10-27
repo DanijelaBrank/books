@@ -19,6 +19,7 @@ import { addBook } from './accessHooks';
 import BookDetailsPage from './BookDetailsPage';
 import BookSearchPage from './BookSearchPage';
 import BookSearchByAuthor from './BookSearchByAuthor';
+import BookSearchByGenre from './BookSearchByGenre';
 //import Sidebar from './Sidebar';
 
 import { useAuth, ProvideAuth} from './useAuth';
@@ -204,75 +205,26 @@ const AddBookPage = () => {
 }
 
 const Sidebar = () => {
- // const ctg=["All books","Science Fiction","Fantasy","Computing","Mystery","Horror"];
- // const { category, setCategory, selected } = usePagedBookList;
-
- // const [categories, setCategories]=useState(ctg);
-  // const renderItem = (name, current, props = {}) => {
-  //   return (
-  //     <li
-  //       className={name === current ? 'active': ''}
-  //       onClick={() => {
-  //         if (!selected) setCategory(name)
-  //       }}
-  //       {...props}
-  //     >
-  //       {name}
-  //     </li>
-  //   )
-  // }
-
    return (<div>
      <List>
-    <ListItem  component={RouterLink} button to="/searchbooks/Science Fiction" variant="contained" sx={{marginRight: "10px"}}>    
+    <ListItem  component={RouterLink} button to='/searchByGenre/ScienceFiction'>    
       <ListItemText primary="Science Fiction" />
     </ListItem>
-    <ListItem button>      
+    <ListItem component={RouterLink} button to= '/searchByGenre/Fantasy' >      
       <ListItemText primary="Fantasy" />
     </ListItem>
-    <ListItem button>     
+    <ListItem component={RouterLink} button to= '/searchByGenre/Computing'>     
       <ListItemText primary="Computing" />
     </ListItem>
-    <ListItem button>      
+    <ListItem component={RouterLink} button to= '/searchByGenre/Mystery'>      
       <ListItemText primary="Mystery" />
     </ListItem>
-    <ListItem button>
+    <ListItem component={RouterLink} button to= '/searchByGenre/Horror' >
       <ListItemText primary="Horror" />
     </ListItem>
     </List>
   </div>
-
-
-
-    //<div>
-  //   <a href="k1">
-  //     <p><b> All books </b></p>
-  //   </a>
-  //   <a href="k2">
-  //     <p><b>Science Fiction </b></p>
-  //   </a>
-  //   <a href="k3">
-  //     <p><b> Fantasy </b></p>
-  //   </a>
-  //   <a href="k4">
-  //     <p><b> Computing </b></p>
-  //   </a>
-  //   <a href="k5">
-  //     <p><b> Mystery </b></p>
-  //   </a>
-  //   <a href="k6">
-  //     <p><b> Horror </b></p>
-  //   </a>
-  // </div>
-    // <div className="sidebar">      
-    //     <h1>Categories</h1>
-    //     <ul>
-    //       {renderItem(categories)}
-    //       {categories.map(cat => renderItem(cat, category, { key: cat }))}
-    //     </ul>
-      
-      
-    // </div>
+ 
   )
 }
 
@@ -319,6 +271,21 @@ function App() {
                 </PrivateRoute>
                 <PrivateRoute path="/searchByAuthor">
                   <BookSearchByAuthor/>
+                </PrivateRoute>
+                <PrivateRoute path="/searchByGenre/ScienceFiction">
+                  <BookSearchByGenre genre={"Science Fiction"}/> 
+                </PrivateRoute>
+                <PrivateRoute path="/searchByGenre/Fantasy">
+                  <BookSearchByGenre genre={"Fantasy"}/> 
+                </PrivateRoute>
+                <PrivateRoute path="/searchByGenre/Computing">
+                  <BookSearchByGenre genre={"Computing"}/> 
+                </PrivateRoute>
+                <PrivateRoute path="/searchByGenre/Mystery">
+                  <BookSearchByGenre genre={"Mystery"}/> 
+                </PrivateRoute>
+                <PrivateRoute path="/searchByGenre/Horror">
+                  <BookSearchByGenre genre={"Horror"}/> 
                 </PrivateRoute>
                 <PrivateRoute path="/book/new">
                   <AddBookPage/>
