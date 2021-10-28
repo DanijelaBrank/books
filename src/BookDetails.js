@@ -101,8 +101,7 @@ const BookDetails = ({ startingMode, book, action }) => {
                     name="rating"
                     label="Rejting: "
                     value={values.rating}
-                    onChange={handleChange}
-                    select
+                    onChange={handleChange}                    
                     onBlur={handleBlur}
                     error={touched.rating && Boolean(errors.rating)}
                     helperText={touched.rating && errors.rating}
@@ -117,6 +116,7 @@ const BookDetails = ({ startingMode, book, action }) => {
                     name="genre"
                     label="Zanr: "
                     value={values.genre}
+                    select
                     onChange={handleChange}
                     onBlur={handleBlur}
                     error={touched.genre && Boolean(errors.genre)}
