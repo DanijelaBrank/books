@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FieldArray, Formik } from 'formik'
 import './BookDetails.css';
-import { toStandardTime } from "./validationTools";
+import {bookYupSchema, toStandardTime } from "./validationTools";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DatePicker from '@mui/lab/DatePicker'
@@ -27,7 +27,7 @@ const BookDetails = ({ startingMode, book, action }) => {
         <h3>{message}</h3>
         <Formik
             initialValues={book}
-          //  validationSchema={bookYupSchema}
+            validationSchema={bookYupSchema}
             onSubmit={(values, {setSubmitting}) => {
                 const rez = action(values);
                 setSubmitting(false);
@@ -108,12 +108,8 @@ const BookDetails = ({ startingMode, book, action }) => {
                     helperText={touched.rating && errors.rating}
                     variant="outlined"
                     InputProps={inputProps}
-                > <MenuItem value={"Science Fiction"}>Science Fiction</MenuItem>
-                <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
-                <MenuItem value={"Computing"}>Computing</MenuItem>
-                <MenuItem value={"Mystery"}>Mystery</MenuItem>
-                <MenuItem value={"Horror"}>Horror</MenuItem>
-                </TextField>        
+                    /> 
+                        
                 
                 <TextField
                     fullWidth
@@ -126,8 +122,14 @@ const BookDetails = ({ startingMode, book, action }) => {
                     error={touched.genre && Boolean(errors.genre)}
                     helperText={touched.genre && errors.genre}
                     variant="outlined"
-                    InputProps={inputProps}
-                />            
+                    InputProps={inputProps}>
+                    <MenuItem value={"Science Fiction"}>Science Fiction</MenuItem>
+                <MenuItem value={"Fantasy"}>Fantasy</MenuItem>
+                <MenuItem value={"Computing"}>Computing</MenuItem>
+                <MenuItem value={"Mystery"}>Mystery</MenuItem>
+                <MenuItem value={"Horror"}>Horror</MenuItem>
+                </TextField>
+                            
                
                 <TextField
                     fullWidth

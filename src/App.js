@@ -206,7 +206,7 @@ const AddBookPage = () => {
 
 const Sidebar = () => {
    return (<div>
-     <List>
+     <List variant="contained">
     <ListItem  component={RouterLink} button to='/searchByGenre/ScienceFiction'>    
       <ListItemText primary="Science Fiction" />
     </ListItem>
