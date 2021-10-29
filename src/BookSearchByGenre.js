@@ -51,5 +51,5 @@ const BookSearchByGenre = ({genre}) => {
         </div>
     }
 }
-
+BookSearchByGenre.defaultProps={genre:""}
 export default BookSearchByGenre;

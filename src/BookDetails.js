@@ -101,8 +101,7 @@ const BookDetails = ({ startingMode, book, action }) => {
                     name="rating"
                     label="Rejting: "
                     value={values.rating}
-                    onChange={handleChange}
-                    select
+                    onChange={handleChange}                    
                     onBlur={handleBlur}
                     error={touched.rating && Boolean(errors.rating)}
                     helperText={touched.rating && errors.rating}
@@ -117,6 +116,7 @@ const BookDetails = ({ startingMode, book, action }) => {
                     name="genre"
                     label="Zanr: "
                     value={values.genre}
+                    select
                     onChange={handleChange}
                     onBlur={handleBlur}
                     error={touched.genre && Boolean(errors.genre)}
@@ -167,13 +167,16 @@ const BookDetails = ({ startingMode, book, action }) => {
                     value={values.available}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    select
                     error={touched.available && Boolean(errors.available)}
                     helperText={touched.available && errors.available}                    
                     variant="outlined"
-                    InputProps={inputProps}
-                />
+                    InputProps={inputProps}>
+                        <MenuItem value={false}>Knjiga nije dostupna</MenuItem>
+                         <MenuItem value={true}>Knjiga je dostupna</MenuItem>
+                </TextField>
 
-<TextField
+                <TextField
                     fullWidth
                     margin="normal"
                     name="pages"

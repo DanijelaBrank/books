@@ -31,6 +31,7 @@ import { useState } from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import { useParams } from 'react-router';
 
 
 const AuthButton = () => {
@@ -207,10 +208,10 @@ const AddBookPage = () => {
 const Sidebar = () => {
    return (<div>
      <List variant="contained">
-    <ListItem  component={RouterLink} button to='/searchByGenre/ScienceFiction'>    
+    <ListItem  component={RouterLink} button to='/searchByGenre/ {"ScienceFiction"}'>    
       <ListItemText primary="Science Fiction" />
     </ListItem>
-    <ListItem component={RouterLink} button to= '/searchByGenre/Fantasy' >      
+    {/* <ListItem component={RouterLink} button to= '/searchByGenre/Fantasy' >      
       <ListItemText primary="Fantasy" />
     </ListItem>
     <ListItem component={RouterLink} button to= '/searchByGenre/Computing'>     
@@ -221,11 +222,15 @@ const Sidebar = () => {
     </ListItem>
     <ListItem component={RouterLink} button to= '/searchByGenre/Horror' >
       <ListItemText primary="Horror" />
-    </ListItem>
+    </ListItem> */}
     </List>
   </div>
  
   )
+}
+const BookSearchByGenreQuery=()=>{
+  const {genre}=useParams();
+  return <BookSearchByGenre initialValues={genre}/>
 }
 
 function App() {
@@ -272,10 +277,10 @@ function App() {
                 <PrivateRoute path="/searchByAuthor">
                   <BookSearchByAuthor/>
                 </PrivateRoute>
-                <PrivateRoute path="/searchByGenre/ScienceFiction">
-                  <BookSearchByGenre genre={"Science Fiction"}/> 
+                <PrivateRoute path="/searchByGenre/:genre">
+                  <BookSearchByGenreQuery/> 
                 </PrivateRoute>
-                <PrivateRoute path="/searchByGenre/Fantasy">
+                {/* <PrivateRoute path="/searchByGenre/Fantasy">
                   <BookSearchByGenre genre={"Fantasy"}/> 
                 </PrivateRoute>
                 <PrivateRoute path="/searchByGenre/Computing">
@@ -286,7 +291,7 @@ function App() {
                 </PrivateRoute>
                 <PrivateRoute path="/searchByGenre/Horror">
                   <BookSearchByGenre genre={"Horror"}/> 
-                </PrivateRoute>
+                </PrivateRoute> */}
                 <PrivateRoute path="/book/new">
                   <AddBookPage/>
                 </PrivateRoute>
