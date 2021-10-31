@@ -57,27 +57,27 @@ const RegisterBox = () => {
                     else {
                         if (validPass1.test(values.password))
                             validNo++;
-                        else e += "Password mora da ima bar dva velika slova.";
+                        else errors.password = "Password mora da ima bar dva velika slova.";
 
                         if (validPass2.test(values.password))
                             validNo++;
-                        else e += "Password mora da ima bar dva mala slova.";
+                        else errors.password += "Password mora da ima bar dva mala slova.";
 
                         if (validPass3.test(values.password))
                             validNo++;
-                        else e += "Password mora da ima bar jednu cifru.";
+                        else errors.password += "Password mora da ima bar jednu cifru.";
 
                         if (validPass4.test(values.password))
                             validNo++;
-                        else e += "Password mora da ima bar jedan specijalni karakter.";
+                        else errors.password += "Password mora da ima bar jedan specijalni karakter.";
 
                         if (values.password.length >= 12)
                             validNo++;
-                        else e += "Password mora da ima bar 12 karaktera.";
+                        else errors.password += "Password mora da ima bar 12 karaktera.";
 
                         if (!Ponovljen(values.password))
                             validNo++;
-                        else e += "Previse ponavljanja istog karaktera u password-u.";
+                        else errors.password += "Previse ponavljanja istog karaktera u password-u.";
                         
                     }}
                     if ((validNo) < 4) errors.password = "Lozinka nije dovoljno jaka. " + e;
@@ -163,4 +163,3 @@ const RegisterBox = () => {
 }
 
 export default RegisterBox;
-
