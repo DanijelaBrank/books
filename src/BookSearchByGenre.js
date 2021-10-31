@@ -6,8 +6,7 @@ import { useAuth } from "./useAuth";
 import { useParams } from 'react-router';
 
 const BookSearchByGenre = () => {
-    const { genre } = useParams();
-    console.log(genre);
+    const { genre } = useParams();    
     const [query, setQuery] = useState(genre);
     useEffect(() => {
         setQuery(genre);

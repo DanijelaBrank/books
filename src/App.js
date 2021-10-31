@@ -1,6 +1,6 @@
 import AdapterLuxon from '@mui/lab/AdapterLuxon';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import { usePagedBookList, deleteBook } from "./accessHooks";
+import { usePagedBookList, deleteBook, newUser } from "./accessHooks";
 import './App.css';
 import BookDetails from './BookDetails';
 import AllBooksPage from './AllBooksPage';
@@ -17,11 +17,13 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import { addBook } from './accessHooks';
+import { addBook,addNewUser } from './accessHooks';
 import BookDetailsPage from './BookDetailsPage';
 import BookSearchPage from './BookSearchPage';
 import BookSearchByAuthor from './BookSearchByAuthor';
 import BookSearchByGenre from './BookSearchByGenre';
+import LoginBox from './LoginBox';
+import RegisterBox from './RegisterBox';
 import { useAuth, ProvideAuth } from './useAuth';
 import { Formik } from 'formik';
 import { TextField } from '@mui/material';
@@ -65,140 +67,11 @@ const PrivateRoute = ({ children, ...rest }) => {
   );
 }
 
-const LoginBox = () => {
-  const history = useHistory();
-  const location = useLocation();
-  const [login, error, signin, signout] = useAuth();
 
-  let { from } = location.state || { from: { pathname: "/" } };
-  return <div className="loginBox">
-    <h3>Login Forma</h3>
-    <Formik
-      initialValues={{ username: "", password: "" }}
-      onSubmit={(values, { setSubmitting }) => {
-        signin(values.username, values.password, () => {
-          setSubmitting(false);
-        }, () => {
-          history.replace(from);
-        });
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        setFieldValue,
-        setFieldTouched,
-        validateField,
-        isSubmitting
-      }) => (
-        <form onSubmit={handleSubmit}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            name="username"
-            value={values.username}
-            label="Korisničko ime"
-            onChange={handleChange}
-          /><br />
-          <TextField
-            fullWidth
-            variant="outlined"
-            name="password"
-            value={values.password}
-            label="Lozinka"
-            onChange={handleChange}
-            type="password"
-          /><br />
-          <Button
-            fullWidth
-            variant="contained"
-            type="submit"
-            disabled={isSubmitting}
-          >
-            Log in
-          </Button>
-          <div>{(error) ? error : ""}</div>
-        </form>
-      )}
-    </Formik>
-  </div>
-}
-
-const RegisterBox = () => {
-  const history = useHistory();
-  const location = useLocation();
-  const [login, error, signin, signout] = useAuth();
-
-  let { from } = location.state || { from: { pathname: "/" } };
-  return <div className="registerBox">
-    <h3>Register Forma</h3>
-    <Formik
-      initialValues={{ username: "", password: "", confirmPassword: "" }}
-      onSubmit={(values, { setSubmitting }) => {
-        signin(values.username, values.password, values.confirmPassword, () => {
-          setSubmitting(false);
-        }, () => {
-          history.replace(from);
-        });
-      }}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        setFieldValue,
-        setFieldTouched,
-        validateField,
-        isSubmitting
-      }) => (
-        <form onSubmit={handleSubmit}>
-          <TextField
-            fullWidth
-            variant="outlined"
-            name="username"
-            value={values.username}
-            label="Korisničko ime"
-            onChange={handleChange}
-          /><br />
-          <TextField
-            fullWidth
-            variant="outlined"
-            name="password"
-            value={values.password}
-            label="Lozinka"
-            onChange={handleChange}
-            type="password"
-          /><br />
-          <TextField
-            fullWidth
-            variant="outlined"
-            name="confirmPassword"
-            value={values.confirmPassword}
-            label=" Provera lozinke"
-            onChange={handleChange}
-            type="confirmPassword"
-          /><br />
-          <Button
-            fullWidth
-            variant="contained"
-            type="submit"
-            disabled={isSubmitting}
-          >
-            Register
-          </Button>
-          <div>{(error) ? error : ""}</div>
-        </form>
-      )}
-    </Formik>
-  </div>
-}
+// const AddNewUserPage = () => {  
+//   return <RegisterBox  action={(newUser) => addNewUser(newUser)}/>
+  
+// }
 
 const AddBookPage = () => {
   const [login] = useAuth();

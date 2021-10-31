@@ -6,8 +6,11 @@
     flex-wrap: wrap;}
   
     .card {
-      position: relative;
-      width: 20%;
+      display:'flex';
+       justify-content:'space-between';
+        flex-direction:'column';
+       /* position: relative; */
+      width: 20%; 
       padding: 10px;}
 
 .star-button{
