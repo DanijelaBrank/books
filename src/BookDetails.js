@@ -6,13 +6,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import DatePicker from '@mui/lab/DatePicker'
 import { useHistory } from "react-router-dom";
-import { MenuItem } from "@mui/material";
-
-
-
-
-
-
+import { Input, MenuItem } from "@mui/material";
 
 const BookDetails = ({ startingMode, book, action }) => {
     const [mode, setMode] = useState(startingMode);
@@ -79,36 +73,20 @@ const BookDetails = ({ startingMode, book, action }) => {
                         variant="outlined"
                         InputProps={inputProps}
                     />
-                    <FieldArray
+                     <TextField
                         fullWidth
                         margin="normal"
                         name="authors"
-                        label="Autori"
-                        //  render={({ move, swap, push, insert, unshift, pop }) => (
-                        // <Form>
-                        //     {values.authors.map((aut, index) => (
-                        //         <div key={index}>
-                        //             <Field name={`authors[${index}]`} />
-                        //         </div>))}
-                        //     {/* <button type="button" onClick={() => push(a)}>
-                        //               +
-                        //             </button>  */}
-
-                        // </Form>
-
-
-                        value={values.authors && values.authors.length > 0 ? (values.authors.map((authors, index) => (<div key={index}>
-                            <Field name={`authors.${index}`} /></div>))) : <Field name={`authors`} />}
-                        // )}
-
+                        label="Autori:"
+                        value={values.authors.join()}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         error={touched.authors && Boolean(errors.authors)}
                         helperText={touched.authors && errors.authors}
                         variant="outlined"
                         InputProps={inputProps}
-                    />
-
+                    />                                
+                  
                     <TextField
                         fullWidth
                         margin="normal"

@@ -19,6 +19,7 @@ import Typography from '@mui/material/Typography';
 import './BookCard.css';
 import { Rating, RatingView } from 'react-simple-star-rating';
 import { useParams } from "react-router";
+import { color } from "@mui/system";
 
 
 function MyStarRating(r) {
@@ -57,19 +58,19 @@ function MyStarRating(r) {
               {/* <Typography sx={{ fontSize: 10 }} color="text.secondary" gutterBottom>
                 id={card.id}
               </Typography> */}
-              <Typography variant="h6" sx={{ textAlign: 'center' }} component="div">
+              <Typography variant="h6" sx={{ textAlign: 'center',fontStyle: 'bold', color:'blue' }} component="div">
                 {card.title}
               </Typography>
-              <Typography >
-              <AuthorsArray authors={card.authors}/>
+              <Typography sx={{fontStyle: 'italic', color:'black'}} >
+              <AuthorsArray authors={card.authors} />
               </Typography>
               <Typography variant="body2">
                 published: {card.publishDate}
               </Typography>
               <Typography className="star-button" variant="body2">
-                <RatingView ratingValue={card.rating} size={20}  /* RatingView Props */ />
+                <RatingView ratingValue={card.rating} size={20}/>
                 <span style={{ flexGrow: 1 }} />
-                <Button size="small"><TableDropdown text="..."
+                <Button size="small" ><TableDropdown text="..."
                   items={
                     [
                       { text: "Pregledaj...", link: true, path: `/book/${card.id}/view` },

@@ -2,11 +2,7 @@
   display: grid;
   width: 100%;  
   grid-template-columns: 200px 1fr;
-  grid-template-rows: 50px 70px 1fr;  
-  /* grid-gap: 10px; */
-  
-  /* grid-template-columns: 1fr;
-  grid-template-rows: 40px 1fr; */
+  grid-template-rows: 50px 70px 1fr;      
 }
 
 .title{
@@ -33,38 +29,25 @@
   grid-column: 2;
   border: 1px solid black;
   align-items: center;
-  text-align: center;
-  padding-bottom: 10px;
+  text-align: center; 
   display: flex;
-  flex-direction: row;
-  
+  flex-direction: row;  
   flex-wrap: wrap;    
   column-gap:10px;
-  row-gap: 10px;
-
-  
-  /* grid-row: 1;
-  grid-column: 1;
-  padding:10px; */
+  row-gap: 10px;  
+  padding:10px; 
 }
 
 .mainContent{
   grid-row: 3;
   grid-column: 2;
-  border: 1px solid black;
-  /* padding-bottom: 10px; */
+  border: 1px solid black;  
   display: flex;
   flex-direction: row;
-  /* overflow-y: scroll; */
-  
+  padding:10px;  
   flex-wrap: wrap;    
   column-gap:10px;
-  row-gap: 10px;
-
-  /* display: flex;
-  flex-direction: row; */
-  /* grid-row: 2;
-  grid-column: 1; */
+  row-gap: 10px; 
 }
 
 .loginBox{
@@ -87,39 +70,6 @@
 
 
 
-.card {
-  border: 1px solid black;
-  box-shadow: 7px 7px #888888;
-  margin: 5px;
-  width: 5cm;
-  height: 5cm;
-}
-
-.ocena {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin: 1px;
-}
-
-.p {
-  text-align: center;
-  font-size: 1.2em;
-}
-
-.star_rating {
-  margin-right: 80%;
-  width: 100%;
-  text-align: center;
-}
-
-.btn {
-  margin-left: 50%;
-  width: 40%;  
-}
-
-.checked {
-  color:blue;
-}
 
 
 

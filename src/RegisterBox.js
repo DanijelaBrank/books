@@ -6,19 +6,39 @@ import {
 import { Button, Link } from '@mui/material';
 import { Formik } from 'formik';
 import { TextField } from '@mui/material';
-import newUser, { addNewUser } from './accessHooks';
-import { useAuth,ProvideAuth } from './useAuth';
+import { useAuth, ProvideAuth } from './useAuth';
+import { useParams } from 'react-router';
+
+const Ponovljen = (p) => {
+    console.log(p);
+    let pass = p;
+    let l = pass.length;
+    pass = pass.split("");
+    let k = 0;
+    for (let i = 0; i < l; i++) {
+        for (let j = i; j < l; j++) {
+            if (pass[i] === pass[j]) {
+                k++;
+            }
+            if (k > 0.25 * l) return (true);
+        } k = 0;
+    }
+    return (false);
+}
+
+
+
+
 
 const RegisterBox = () => {
     const history = useHistory();
-    const location = useLocation();    
+    const location = useLocation();
     const [login, error, signin, addNewUser, signout, isExistUsername, check] = useAuth();
-    const[validNo,setValidNo]=useState(0);
-    const [passError, setPassError] = useState(false);
-    const validPass1=new RegExp('^.*([A-Z]).*([A-Z]).*$');
-    const validPass2=new RegExp('^.*([a-z]).*([a-z]).*$');
-    const validPass3=new RegExp('^.*\d.*$');
-    const validPass4=new RegExp('^(?=.*[ -\/:-@\[-\`{-~]{1,})$')
+    const validPass1 = new RegExp('^.*([A-Z]).*([A-Z]).*$');
+    const validPass2 = new RegExp('^.*([a-z]).*([a-z]).*$');
+    const validPass3 = new RegExp('^.*([0-9]).*$');
+    const validPass4 = new RegExp('[*@!#%&()^~{}]+');
+    let validNo = 0;
     let { from } = location.state || { from: { pathname: "/" } };
     return <div className="registerBox">
         <h3>Register Forma</h3>
@@ -26,45 +46,49 @@ const RegisterBox = () => {
             initialValues={{ username: "", password: "", confirmPassword: "" }}
             validate={(values) => {
                 const errors = {};
+                let e = "";
                 if (!values.username) {
                     errors.username = "Username je obavezno polje";
-                }
-                isExistUsername(values.username);
-                if (check) {
-                    errors.username = "Username vec postoji. Izaberite drugo."
-                }
-                else{
+                } else {
+                    isExistUsername(values.username);
+                    if (check) {
+                        errors.username = "Username vec postoji. Izaberite drugo."
+                    }
+                    else {
+                        if (validPass1.test(values.password))
+                            validNo++;
+                        else e += "Password mora da ima bar dva velika slova.";
+
+                        if (validPass2.test(values.password))
+                            validNo++;
+                        else e += "Password mora da ima bar dva mala slova.";
+
+                        if (validPass3.test(values.password))
+                            validNo++;
+                        else e += "Password mora da ima bar jednu cifru.";
+
+                        if (validPass4.test(values.password))
+                            validNo++;
+                        else e += "Password mora da ima bar jedan specijalni karakter.";
+
+                        if (values.password.length >= 12)
+                            validNo++;
+                        else e += "Password mora da ima bar 12 karaktera.";
+
+                        if (!Ponovljen(values.password))
+                            validNo++;
+                        else e += "Previse ponavljanja istog karaktera u password-u.";
+                        
+                    }}
+                    if ((validNo) < 4) errors.password = "Lozinka nije dovoljno jaka. " + e;
                 if (values.password != values.confirmPassword) {
-                    errors.password = "Password i ConfirmPassword moraju da budu iste."
+                    errors.confirmPassword = "Password i ConfirmPassword moraju da budu iste."
                 }
-                if (validPass1.test(values.password))
-                    setValidNo(validNo+1);
-                else errors.password = "Password mora da ima bar dva velika slova.";
-
-                if (validPass2.test(values.password))
-                    setValidNo(validNo+1);
-                else errors.password = "Password mora da ima bar dva mala slova.";
-
-                if (validPass3.test(values.password))
-                    setValidNo(validNo+1);
-                else errors.password = "Password mora da ima bar jednu cifru.";
-
-                if (validPass4.test(values.password))
-                    setValidNo(validNo+1);
-                else errors.password = "Password mora da ima bar jedan specijalni karakter.";
-           
-                if(values.password.length>=12)
-                setValidNo(validNo+1);
-                else errors.password = "Password mora da ima bar 12 karaktera.";
+                return errors
             }
-
-
-
-           // if ((validNo)>=4)
-
-            }} 
+            }
             onSubmit={(values, { setSubmitting }) => {
-                addNewUser(values.username, values.password, values.confirmPassword, () => {
+                addNewUser(values.username, values.password, () => {
                     setSubmitting(false);
                 }, () => {
                     history.replace(from);
@@ -92,6 +116,10 @@ const RegisterBox = () => {
                         value={values.username}
                         label="Korisničko ime"
                         onChange={handleChange}
+                        onBlur={handleBlur}
+                        error={touched.username && Boolean(errors.username)}
+                        helperText={touched.username && errors.username}
+
                     /><br />
                     <TextField
                         fullWidth
@@ -101,6 +129,10 @@ const RegisterBox = () => {
                         label="Lozinka"
                         onChange={handleChange}
                         type="password"
+                        onBlur={handleBlur}
+                        error={touched.password && Boolean(errors.password)}
+                        helperText={touched.password && errors.password}
+
                     /><br />
                     <TextField
                         fullWidth
@@ -110,6 +142,10 @@ const RegisterBox = () => {
                         label=" Provera lozinke"
                         onChange={handleChange}
                         type="confirmPassword"
+                        onBlur={handleBlur}
+                        error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+                        helperText={touched.confirmPassword && errors.confirmPassword}
+
                     /><br />
                     <Button
                         fullWidth
@@ -126,8 +162,5 @@ const RegisterBox = () => {
     </div>
 }
 
-    // RegisterBox.defaultProps = {
-    //     newUser: { id: null, username: "", password: "", confirmPassword: "" }
-    // }
-    export default RegisterBox;
+export default RegisterBox;
 

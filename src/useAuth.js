@@ -65,7 +65,7 @@ const useProvideAuth = () => {
         })
         .catch(err => {
             setLogin(null);
-            setError(err);
+           setError(err);
             failCallback();
         });
     }
@@ -76,7 +76,7 @@ const useProvideAuth = () => {
         cb();
     }
 
-    const isExistUsername=(username)=>{
+    const isExistUsername= (username)=>{
         const url="http://localhost:3081/app/checkUsername";
         fetch(`{url}/${username}`, {
             method: "GET",
