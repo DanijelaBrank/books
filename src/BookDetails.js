@@ -78,7 +78,7 @@ const BookDetails = ({ startingMode, book, action }) => {
                         margin="normal"
                         name="authors"
                         label="Autori:"
-                        value={values.authors.join()}
+                        value={values.authors}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         error={touched.authors && Boolean(errors.authors)}

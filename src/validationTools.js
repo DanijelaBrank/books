@@ -5,7 +5,7 @@ import { DateTime } from 'luxon';
 export const bookYupSchema = yup.object().shape({
     id: yup.mixed().nullable(true).default(null),
     title: yup.string().ensure().required("Mora se uneti naslov knjige"),
-    authors: yup.array().of(yup.string().required("Mora se uneti autor")),                          
+    authors: yup.string().required("Mora se uneti autor"),                          
     publishDate: yup.date().max(DateTime.now(), "Ne može datum skoriji od danas"),
     rating: yup.number().min(1).max(5).required("Mora se uneti rejting"),
     genre: yup.string().ensure().required("Mora se uneti zanr"),
