@@ -11,9 +11,14 @@ import { useAuth,ProvideAuth } from './useAuth';
 
 const RegisterBox = () => {
     const history = useHistory();
-    const location = useLocation();
-    
+    const location = useLocation();    
     const [login, error, signin, addNewUser, signout, isExistUsername, check] = useAuth();
+    const[validNo,setValidNo]=useState(0);
+    const [passError, setPassError] = useState(false);
+    const validPass1=new RegExp('^.*([A-Z]).*([A-Z]).*$');
+    const validPass2=new RegExp('^.*([a-z]).*([a-z]).*$');
+    const validPass3=new RegExp('^.*\d.*$');
+    const validPass4=new RegExp('^(?=.*[ -\/:-@\[-\`{-~]{1,})$')
     let { from } = location.state || { from: { pathname: "/" } };
     return <div className="registerBox">
         <h3>Register Forma</h3>
@@ -28,11 +33,36 @@ const RegisterBox = () => {
                 if (check) {
                     errors.username = "Username vec postoji. Izaberite drugo."
                 }
+                else{
                 if (values.password != values.confirmPassword) {
                     errors.password = "Password i ConfirmPassword moraju da budu iste."
                 }
+                if (validPass1.test(values.password))
+                    setValidNo(validNo+1);
+                else errors.password = "Password mora da ima bar dva velika slova.";
 
-            }}
+                if (validPass2.test(values.password))
+                    setValidNo(validNo+1);
+                else errors.password = "Password mora da ima bar dva mala slova.";
+
+                if (validPass3.test(values.password))
+                    setValidNo(validNo+1);
+                else errors.password = "Password mora da ima bar jednu cifru.";
+
+                if (validPass4.test(values.password))
+                    setValidNo(validNo+1);
+                else errors.password = "Password mora da ima bar jedan specijalni karakter.";
+           
+                if(values.password.length>=12)
+                setValidNo(validNo+1);
+                else errors.password = "Password mora da ima bar 12 karaktera.";
+            }
+
+
+
+           // if ((validNo)>=4)
+
+            }} 
             onSubmit={(values, { setSubmitting }) => {
                 addNewUser(values.username, values.password, values.confirmPassword, () => {
                     setSubmitting(false);
